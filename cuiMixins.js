@@ -81,30 +81,30 @@ export const RenderButtonMixin = superclass => class extends superclass {
     if (super.render)
       super.render(ctx, clicked, x0, y0, x1, y1);
 
-    const asdf = 4;
+    const filletSize = 4;
     // top
     ctx.strokeStyle = clicked ? '#330000' : 'white';
     ctx.beginPath();
-    ctx.lineWidth = asdf;
+    ctx.lineWidth = filletSize;
     ctx.moveTo(x0*UNIT_SIZE, y0*UNIT_SIZE + ctx.lineWidth/2);
     ctx.lineTo(x1*UNIT_SIZE, y0*UNIT_SIZE + ctx.lineWidth/2);
     ctx.stroke();
     //left
     ctx.beginPath();
-    ctx.lineWidth = asdf/2;
+    ctx.lineWidth = filletSize/2;
     ctx.moveTo(x0*UNIT_SIZE + ctx.lineWidth/2, y1*UNIT_SIZE);
     ctx.lineTo(x0*UNIT_SIZE + ctx.lineWidth/2, y0*UNIT_SIZE);
     ctx.stroke();
     // bottom
     ctx.strokeStyle = clicked ? 'white' : '#330000';
     ctx.beginPath();
-    ctx.lineWidth = asdf;
+    ctx.lineWidth = filletSize;
     ctx.moveTo(x0*UNIT_SIZE, y1*UNIT_SIZE - ctx.lineWidth/2);
     ctx.lineTo(x1*UNIT_SIZE, y1*UNIT_SIZE - ctx.lineWidth/2);
     ctx.stroke();
     // right
     ctx.beginPath();
-    ctx.lineWidth = asdf/2;
+    ctx.lineWidth = filletSize/2;
     ctx.moveTo(x1*UNIT_SIZE - ctx.lineWidth/2, y0*UNIT_SIZE);
     ctx.lineTo(x1*UNIT_SIZE - ctx.lineWidth/2, y1*UNIT_SIZE);
     ctx.stroke();
@@ -112,7 +112,48 @@ export const RenderButtonMixin = superclass => class extends superclass {
     ctx.strokeStyle = 'lightgray';
     ctx.beginPath();
     ctx.moveTo(x1*UNIT_SIZE - ctx.lineWidth/2, y0*UNIT_SIZE);
-    ctx.lineTo(x1*UNIT_SIZE - ctx.lineWidth/2, y0*UNIT_SIZE + asdf);
+    ctx.lineTo(x1*UNIT_SIZE - ctx.lineWidth/2, y0*UNIT_SIZE + filletSize);
+    ctx.stroke();
+  }
+};
+
+export const RenderNonClickableButtonMixin = superclass => class extends superclass {
+  render(ctx, clicked, x0, y0, x1, y1) {
+    if (super.render)
+      super.render(ctx, clicked, x0, y0, x1, y1);
+
+    const filletSize = 4;
+    // top
+    ctx.strokeStyle = 'white';
+    ctx.beginPath();
+    ctx.lineWidth = filletSize;
+    ctx.moveTo(x0*UNIT_SIZE, y0*UNIT_SIZE + ctx.lineWidth/2);
+    ctx.lineTo(x1*UNIT_SIZE, y0*UNIT_SIZE + ctx.lineWidth/2);
+    ctx.stroke();
+    //left
+    ctx.beginPath();
+    ctx.lineWidth = filletSize/2;
+    ctx.moveTo(x0*UNIT_SIZE + ctx.lineWidth/2, y1*UNIT_SIZE);
+    ctx.lineTo(x0*UNIT_SIZE + ctx.lineWidth/2, y0*UNIT_SIZE);
+    ctx.stroke();
+    // bottom
+    ctx.strokeStyle = '#330000';
+    ctx.beginPath();
+    ctx.lineWidth = filletSize;
+    ctx.moveTo(x0*UNIT_SIZE, y1*UNIT_SIZE - ctx.lineWidth/2);
+    ctx.lineTo(x1*UNIT_SIZE, y1*UNIT_SIZE - ctx.lineWidth/2);
+    ctx.stroke();
+    // right
+    ctx.beginPath();
+    ctx.lineWidth = filletSize/2;
+    ctx.moveTo(x1*UNIT_SIZE - ctx.lineWidth/2, y0*UNIT_SIZE);
+    ctx.lineTo(x1*UNIT_SIZE - ctx.lineWidth/2, y1*UNIT_SIZE);
+    ctx.stroke();
+    // corner
+    ctx.strokeStyle = 'lightgray';
+    ctx.beginPath();
+    ctx.moveTo(x1*UNIT_SIZE - ctx.lineWidth/2, y0*UNIT_SIZE);
+    ctx.lineTo(x1*UNIT_SIZE - ctx.lineWidth/2, y0*UNIT_SIZE + filletSize);
     ctx.stroke();
   }
 };

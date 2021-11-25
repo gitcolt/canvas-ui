@@ -1,5 +1,5 @@
 import {PanelGroup, Panel, drawPanelGroup} from './cui';
-import {mix, RenderButtonMixin, RenderDynamicTextMixin, RenderStaticTextMixin} from './cuiMixins';
+import {mix, RenderButtonMixin, RenderDynamicTextMixin, RenderStaticTextMixin, RenderNonClickableButtonMixin} from './cuiMixins';
 import {writeDebugString} from './debug';
 
 const can = document.querySelector('#can');
@@ -27,7 +27,6 @@ const TextButtonPanel = mix(Panel)
 const counter = new TextButtonPanel(0, 0, 10, 4);
 counter.registerClickStartCallback(_ => {
   o.count++;
-  console.log(o.count);
 });
 
 const panels = [
@@ -37,9 +36,8 @@ const panels = [
   new (mix(Panel).with(RenderButtonMixin))(20, 0, 10, 4),
 
   // row 1
-  new (mix(Panel).with(RenderButtonMixin, RenderStaticTextMixin('hello')))(0, 4, 10, 4),
-  new (RenderButtonMixin(Panel))(10, 4, 10, 4),
-  new TextButtonPanel(20, 4, 10, 4),
+  new (mix(Panel).with(RenderNonClickableButtonMixin, RenderStaticTextMixin('hello')))(0, 4, 10, 4),
+  new (mix(Panel).with(RenderNonClickableButtonMixin))(10, 4, 10, 4),
 ];
 
 panels.forEach(p => {
